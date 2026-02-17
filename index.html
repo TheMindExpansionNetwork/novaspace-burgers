@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Novaspace Burgers 🍔🚀 | Eugene, Oregon</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0b0b1a;
+      --surface: #111128;
+      --border: #1e1e3a;
+      --text: #e8e8f0;
+      --dim: #7a7a9a;
+      --nova: #ff6b2b;
+      --nova-glow: #ff8f5a;
+      --space: #6b3fa0;
+      --space-light: #9b6fd0;
+      --star: #ffd700;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      overflow-x: hidden;
+    }
+
+    /* Stars background */
+    .stars {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .stars::before, .stars::after {
+      content: '';
+      position: absolute;
+      width: 2px; height: 2px;
+      background: white;
+      border-radius: 50%;
+      box-shadow:
+        25px 50px white, 100px 120px white, 200px 80px white,
+        300px 200px white, 400px 50px white, 500px 300px white,
+        50px 250px white, 150px 350px white, 350px 400px white,
+        600px 100px white, 700px 250px white, 800px 350px white,
+        250px 500px white, 450px 150px white, 650px 450px white,
+        100px 600px white, 750px 50px white, 550px 500px white,
+        900px 200px white, 1000px 400px white, 1100px 100px white,
+        1200px 300px white, 850px 500px white, 950px 350px white;
+      animation: twinkle 3s infinite alternate;
+    }
+
+    .stars::after {
+      width: 1px; height: 1px;
+      box-shadow:
+        75px 150px rgba(255,255,255,0.6), 250px 220px rgba(255,255,255,0.5),
+        450px 350px rgba(255,255,255,0.7), 650px 180px rgba(255,255,255,0.4),
+        850px 420px rgba(255,255,255,0.6), 150px 480px rgba(255,255,255,0.5),
+        350px 50px rgba(255,255,255,0.7), 550px 280px rgba(255,255,255,0.4),
+        1050px 150px rgba(255,255,255,0.6), 1150px 350px rgba(255,255,255,0.5);
+      animation: twinkle 4s infinite alternate-reverse;
+    }
+
+    @keyframes twinkle {
+      0% { opacity: 0.3; }
+      100% { opacity: 1; }
+    }
+
+    /* Navigation */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      background: rgba(11, 11, 26, 0.95);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+      z-index: 100;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1.5rem;
+      font-weight: 900;
+      background: linear-gradient(135deg, var(--nova), var(--star));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--dim);
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+
+    .nav-links a:hover { color: var(--nova); }
+
+    /* Hero */
+    .hero {
+      position: relative;
+      z-index: 1;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 2rem;
+    }
+
+    .hero-emoji {
+      font-size: 6rem;
+      margin-bottom: 1rem;
+      animation: float 3s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-20px); }
+    }
+
+    .hero h1 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 4rem;
+      font-weight: 900;
+      background: linear-gradient(135deg, var(--nova), var(--star), var(--nova-glow));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 1rem;
+      line-height: 1.1;
+    }
+
+    .hero p {
+      font-size: 1.3rem;
+      color: var(--dim);
+      max-width: 600px;
+      margin-bottom: 2rem;
+    }
+
+    .hero-location {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--space-light);
+      font-weight: 500;
+      margin-bottom: 2rem;
+    }
+
+    .cta-btn {
+      display: inline-block;
+      padding: 1rem 2.5rem;
+      background: linear-gradient(135deg, var(--nova), #e85520);
+      color: white;
+      font-family: 'Orbitron', sans-serif;
+      font-weight: 700;
+      font-size: 1.1rem;
+      text-decoration: none;
+      border-radius: 50px;
+      border: none;
+      cursor: pointer;
+      transition: transform 0.3s, box-shadow 0.3s;
+      box-shadow: 0 0 30px rgba(255, 107, 43, 0.4);
+    }
+
+    .cta-btn:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 50px rgba(255, 107, 43, 0.6);
+    }
+
+    /* Sections */
+    section {
+      position: relative;
+      z-index: 1;
+      padding: 5rem 2rem;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    h2 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 2.5rem;
+      text-align: center;
+      margin-bottom: 1rem;
+      background: linear-gradient(135deg, var(--nova), var(--star));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .section-subtitle {
+      text-align: center;
+      color: var(--dim);
+      font-size: 1.1rem;
+      margin-bottom: 3rem;
+    }
+
+    /* Menu Grid */
+    .menu-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+    }
+
+    .menu-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 1.5rem;
+      padding: 2rem;
+      transition: transform 0.3s, border-color 0.3s;
+    }
+
+    .menu-card:hover {
+      transform: translateY(-5px);
+      border-color: var(--nova);
+    }
+
+    .menu-card .emoji { font-size: 3rem; margin-bottom: 1rem; }
+
+    .menu-card h3 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1.3rem;
+      color: var(--nova-glow);
+      margin-bottom: 0.5rem;
+    }
+
+    .menu-card .desc {
+      color: var(--dim);
+      line-height: 1.6;
+      margin-bottom: 1rem;
+    }
+
+    .menu-card .price {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1.5rem;
+      color: var(--star);
+    }
+
+    /* About */
+    .about-content {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: center;
+    }
+
+    .about-text p {
+      color: var(--dim);
+      line-height: 1.8;
+      margin-bottom: 1rem;
+    }
+
+    .about-stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+    }
+
+    .stat-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 1rem;
+      padding: 1.5rem;
+      text-align: center;
+    }
+
+    .stat-card .number {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 2rem;
+      font-weight: 900;
+      color: var(--nova);
+    }
+
+    .stat-card .label {
+      color: var(--dim);
+      font-size: 0.9rem;
+      margin-top: 0.25rem;
+    }
+
+    /* Reviews */
+    .reviews-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .review-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 1rem;
+      padding: 1.5rem;
+    }
+
+    .review-stars { color: var(--star); font-size: 1.2rem; margin-bottom: 0.75rem; }
+    .review-text { color: var(--dim); line-height: 1.6; font-style: italic; margin-bottom: 0.75rem; }
+    .review-author { color: var(--space-light); font-weight: 600; }
+
+    /* Contact / Hours */
+    .info-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+    }
+
+    .info-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 1rem;
+      padding: 2rem;
+    }
+
+    .info-card h3 {
+      font-family: 'Orbitron', sans-serif;
+      color: var(--nova-glow);
+      margin-bottom: 1rem;
+    }
+
+    .info-card p, .info-card li {
+      color: var(--dim);
+      line-height: 2;
+    }
+
+    .info-card ul { list-style: none; }
+
+    /* Footer */
+    footer {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      padding: 3rem 2rem;
+      border-top: 1px solid var(--border);
+    }
+
+    footer .logo { font-size: 1.2rem; margin-bottom: 0.5rem; }
+    footer p { color: var(--dim); font-size: 0.9rem; }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .hero h1 { font-size: 2.5rem; }
+      .about-content { grid-template-columns: 1fr; }
+      .info-grid { grid-template-columns: 1fr; }
+      .nav-links { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <div class="stars"></div>
+
+  <nav>
+    <div class="logo">🍔 NOVASPACE</div>
+    <ul class="nav-links">
+      <li><a href="#menu">Menu</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#reviews">Reviews</a></li>
+      <li><a href="#visit">Visit</a></li>
+    </ul>
+  </nav>
+
+  <section class="hero">
+    <div class="hero-emoji">🍔🚀</div>
+    <h1>NOVASPACE BURGERS</h1>
+    <p>Burgers from another dimension. Crafted in Eugene, Oregon with locally sourced ingredients and intergalactic flavor.</p>
+    <div class="hero-location">📍 Eugene, Oregon — Earth (for now)</div>
+    <a href="#menu" class="cta-btn">EXPLORE THE MENU</a>
+  </section>
+
+  <section id="menu">
+    <div class="container">
+      <h2>THE MENU</h2>
+      <p class="section-subtitle">Each burger is a journey through flavor and space</p>
+      <div class="menu-grid">
+        <div class="menu-card">
+          <div class="emoji">☄️</div>
+          <h3>THE SUPERNOVA</h3>
+          <p class="desc">Double smash patty, ghost pepper aioli, caramelized onions, smoked gouda, and our signature nova sauce. Not for the faint of heart.</p>
+          <div class="price">$16.99</div>
+        </div>
+        <div class="menu-card">
+          <div class="emoji">🪐</div>
+          <h3>SATURN RINGS</h3>
+          <p class="desc">Crispy wagyu patty, beer-battered onion rings, bacon jam, aged cheddar, and house-made BBQ on a brioche bun.</p>
+          <div class="price">$14.99</div>
+        </div>
+        <div class="menu-card">
+          <div class="emoji">🌌</div>
+          <h3>THE NEBULA</h3>
+          <p class="desc">Impossible plant patty, avocado, pickled jalapeños, vegan chipotle mayo, sprouts, and cosmic dust seasoning.</p>
+          <div class="price">$15.99</div>
+        </div>
+        <div class="menu-card">
+          <div class="emoji">🌙</div>
+          <h3>DARK SIDE CLASSIC</h3>
+          <p class="desc">Single patty, American cheese, lettuce, tomato, pickle, and special sauce. Simple. Perfect. Timeless.</p>
+          <div class="price">$11.99</div>
+        </div>
+        <div class="menu-card">
+          <div class="emoji">🛸</div>
+          <h3>THE UFO</h3>
+          <p class="desc">Triple patty, three cheeses, fried egg, bacon, crispy shallots. Comes with a warning label and a napkin stack.</p>
+          <div class="price">$19.99</div>
+        </div>
+        <div class="menu-card">
+          <div class="emoji">⭐</div>
+          <h3>STARDUST FRIES</h3>
+          <p class="desc">Hand-cut Willamette Valley potatoes, truffle oil, parmesan, fresh herbs, and cosmic dust seasoning.</p>
+          <div class="price">$7.99</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="about" style="background: var(--surface);">
+    <div class="container">
+      <h2>OUR STORY</h2>
+      <p class="section-subtitle">Born in Eugene. Inspired by the cosmos.</p>
+      <div class="about-content">
+        <div class="about-text">
+          <p>Novaspace Burgers launched in 2024 with one mission: make burgers that feel like a trip through the galaxy. We source our beef from Oregon ranches, our produce from Willamette Valley farms, and our inspiration from the stars.</p>
+          <p>Every burger is smashed to order on our custom flat-top griddle. Every sauce is made in-house. Every bite is an experience.</p>
+          <p>We're not just a burger joint — we're a launchpad. Come hungry. Leave in orbit. 🚀</p>
+        </div>
+        <div class="about-stats">
+          <div class="stat-card">
+            <div class="number">100%</div>
+            <div class="label">Oregon Sourced</div>
+          </div>
+          <div class="stat-card">
+            <div class="number">6</div>
+            <div class="label">Signature Burgers</div>
+          </div>
+          <div class="stat-card">
+            <div class="number">4.9★</div>
+            <div class="label">Google Rating</div>
+          </div>
+          <div class="stat-card">
+            <div class="number">∞</div>
+            <div class="label">Flavor Dimensions</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="reviews">
+    <div class="container">
+      <h2>TRANSMISSIONS</h2>
+      <p class="section-subtitle">What our fellow travelers are saying</p>
+      <div class="reviews-grid">
+        <div class="review-card">
+          <div class="review-stars">⭐⭐⭐⭐⭐</div>
+          <p class="review-text">"The Supernova literally changed my life. I drove from Portland just for this burger and I'd do it again tomorrow."</p>
+          <div class="review-author">— Sarah K., Portland</div>
+        </div>
+        <div class="review-card">
+          <div class="review-stars">⭐⭐⭐⭐⭐</div>
+          <p class="review-text">"Best burger in Eugene, hands down. The space theme is fun but the food is SERIOUS. Those Stardust Fries are insane."</p>
+          <div class="review-author">— Mike T., Eugene</div>
+        </div>
+        <div class="review-card">
+          <div class="review-stars">⭐⭐⭐⭐⭐</div>
+          <p class="review-text">"As a vegan, I never thought I'd be obsessed with a burger joint. The Nebula is the best plant-based burger I've ever had."</p>
+          <div class="review-author">— Jade R., Corvallis</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="visit" style="background: var(--surface);">
+    <div class="container">
+      <h2>VISIT THE STATION</h2>
+      <p class="section-subtitle">Your coordinates to flavor</p>
+      <div class="info-grid">
+        <div class="info-card">
+          <h3>📍 LOCATION</h3>
+          <p>742 Willamette Street<br>Eugene, OR 97401</p>
+          <br>
+          <h3>📞 CONTACT</h3>
+          <p>Phone: (541) 555-NOVA<br>Email: hello@novaspaceburgers.com</p>
+        </div>
+        <div class="info-card">
+          <h3>🕐 HOURS</h3>
+          <ul>
+            <li>Monday – Thursday: 11am – 10pm</li>
+            <li>Friday – Saturday: 11am – 12am</li>
+            <li>Sunday: 12pm – 9pm</li>
+          </ul>
+          <br>
+          <h3>🚗 PARKING</h3>
+          <p>Free lot behind the building + street parking</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="logo">🍔 NOVASPACE BURGERS</div>
+    <p>© 2024 Novaspace Burgers — Eugene, Oregon 🚀</p>
+    <p style="margin-top: 0.5rem;">Built with love, burgers, and a little cosmic dust.</p>
+  </footer>
+</body>
+</html>
