@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Invoice — Novaspace Burgers Website</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Helvetica Neue', Arial, sans-serif; color: #1a1a2e; background: #f5f5f5; padding: 2rem; }
+    .invoice {
+      max-width: 700px;
+      margin: 0 auto;
+      background: white;
+      border-radius: 12px;
+      padding: 3rem;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    }
+    .header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 2.5rem; border-bottom: 3px solid #ff6b2b; padding-bottom: 1.5rem; }
+    .brand h1 { font-size: 1.8rem; color: #ff6b2b; }
+    .brand p { color: #666; font-size: 0.9rem; margin-top: 0.25rem; }
+    .invoice-meta { text-align: right; }
+    .invoice-meta h2 { font-size: 2rem; color: #1a1a2e; letter-spacing: 2px; }
+    .invoice-meta p { color: #666; font-size: 0.9rem; margin-top: 0.25rem; }
+    .parties { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-bottom: 2.5rem; }
+    .party h3 { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; color: #999; margin-bottom: 0.5rem; }
+    .party p { color: #333; line-height: 1.6; }
+    table { width: 100%; border-collapse: collapse; margin-bottom: 2rem; }
+    th { background: #1a1a2e; color: white; padding: 0.75rem 1rem; text-align: left; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; }
+    th:last-child { text-align: right; }
+    td { padding: 1rem; border-bottom: 1px solid #eee; color: #333; }
+    td:last-child { text-align: right; font-weight: 600; }
+    .item-desc { color: #666; font-size: 0.85rem; margin-top: 0.25rem; }
+    .totals { display: flex; justify-content: flex-end; margin-bottom: 2rem; }
+    .totals-table { width: 280px; }
+    .totals-row { display: flex; justify-content: space-between; padding: 0.5rem 0; color: #666; }
+    .totals-row.total { border-top: 2px solid #1a1a2e; padding-top: 0.75rem; margin-top: 0.5rem; font-size: 1.3rem; font-weight: 700; color: #1a1a2e; }
+    .payment-box { background: #f8f8fc; border: 1px solid #e0e0e8; border-radius: 8px; padding: 1.5rem; margin-bottom: 2rem; }
+    .payment-box h3 { font-size: 0.9rem; color: #1a1a2e; margin-bottom: 0.75rem; }
+    .payment-box p { color: #555; line-height: 1.8; font-size: 0.9rem; }
+    .payment-methods { display: flex; gap: 1rem; margin-top: 1rem; flex-wrap: wrap; }
+    .method { background: white; border: 1px solid #ddd; border-radius: 6px; padding: 0.5rem 1rem; font-size: 0.85rem; color: #333; }
+    .footer { text-align: center; color: #999; font-size: 0.8rem; margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid #eee; }
+    .highlight { color: #ff6b2b; font-weight: 600; }
+    @media print {
+      body { background: white; padding: 0; }
+      .invoice { box-shadow: none; padding: 2rem; }
+    }
+  </style>
+</head>
+<body>
+  <div class="invoice">
+    <div class="header">
+      <div class="brand">
+        <h1>🏛️ MindBots Agency</h1>
+        <p>AI-Powered Web Development</p>
+        <p>Oregon, USA</p>
+      </div>
+      <div class="invoice-meta">
+        <h2>INVOICE</h2>
+        <p><strong>Invoice #:</strong> INV-2026-0217</p>
+        <p><strong>Date:</strong> February 17, 2026</p>
+        <p><strong>Due:</strong> Upon Receipt</p>
+      </div>
+    </div>
+
+    <div class="parties">
+      <div class="party">
+        <h3>From</h3>
+        <p>
+          <strong>The Mind Expansion Network</strong><br>
+          MindBots Agency<br>
+          Oregon, USA<br>
+          <!-- Add your email here -->
+        </p>
+      </div>
+      <div class="party">
+        <h3>Bill To</h3>
+        <p>
+          <strong>Novaspace Burgers</strong><br>
+          742 Willamette Street<br>
+          Eugene, OR 97401<br>
+          <!-- Client email here -->
+        </p>
+      </div>
+    </div>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Description</th>
+          <th>Amount</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>
+            <strong>Custom Website Design & Development</strong>
+            <div class="item-desc">Full responsive website with space theme, menu, about, reviews, and contact sections. Mobile-optimized.</div>
+          </td>
+          <td>$500.00</td>
+        </tr>
+        <tr>
+          <td>
+            <strong>Vercel Deployment & Hosting Setup</strong>
+            <div class="item-desc">Production deployment on Vercel with SSL, CDN, and global edge network. Includes initial setup.</div>
+          </td>
+          <td>$100.00</td>
+        </tr>
+        <tr>
+          <td>
+            <strong>GitHub Repository Setup</strong>
+            <div class="item-desc">Source code hosted on GitHub with version control for future updates.</div>
+          </td>
+          <td>$50.00</td>
+        </tr>
+        <tr>
+          <td>
+            <strong>Custom Domain Setup</strong>
+            <div class="item-desc">Connect your domain (e.g. novaspaceburgers.com) to the live site. Domain purchase not included.</div>
+          </td>
+          <td>Included</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="totals">
+      <div class="totals-table">
+        <div class="totals-row">
+          <span>Subtotal</span>
+          <span>$650.00</span>
+        </div>
+        <div class="totals-row">
+          <span>Launch Discount (15%)</span>
+          <span class="highlight">-$97.50</span>
+        </div>
+        <div class="totals-row total">
+          <span>Total Due</span>
+          <span>$552.50</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="payment-box">
+      <h3>💳 Payment Methods</h3>
+      <p>Payment is due upon receipt. We accept the following methods:</p>
+      <div class="payment-methods">
+        <div class="method">💰 Venmo</div>
+        <div class="method">💵 Cash App</div>
+        <div class="method">🏦 Zelle</div>
+        <div class="method">💳 PayPal</div>
+        <div class="method">₿ Crypto</div>
+      </div>
+      <p style="margin-top: 1rem;"><strong>Contact for payment details:</strong> <!-- Add your contact --></p>
+    </div>
+
+    <div class="payment-box">
+      <h3>📦 What's Included</h3>
+      <p>
+        ✅ Live website: <a href="https://novaspace-burgers.vercel.app" style="color: #ff6b2b;">novaspace-burgers.vercel.app</a><br>
+        ✅ Source code: <a href="https://github.com/TheMindExpansionNetwork/novaspace-burgers" style="color: #ff6b2b;">GitHub Repository</a><br>
+        ✅ Responsive design (desktop + mobile)<br>
+        ✅ SEO-ready structure<br>
+        ✅ Free hosting on Vercel (unlimited traffic)<br>
+        ✅ 30 days of free revisions<br>
+        ✅ Custom domain setup assistance
+      </p>
+    </div>
+
+    <div class="footer">
+      <p>Thank you for choosing The Mind Expansion Network! 🏛️🔥</p>
+      <p>Questions? Reply to this email anytime.</p>
+    </div>
+  </div>
+</body>
+</html>
